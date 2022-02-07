@@ -10,9 +10,23 @@ import RxSwift
 import SwiftyJSON
 import UIKit
 
-let MEMBER_LIST_URL = "https://my.api.mockaroo.com/members_with_avatar.json?key=44ce18f0"
+fileprivate let MEMBER_LIST_URL = "https://my.api.mockaroo.com/members_with_avatar.json?key=44ce18f0"
 
 final class ViewController: UIViewController {
+    // MARK: - Nested Types
+    
+    final class 나중에생기는데이터<T> {
+        private let task: (@escaping (T) -> Void) -> Void
+        
+        init(task: @escaping (@escaping (T) -> Void) -> Void) {
+            self.task = task
+        }
+        
+        func 나중에오면(_ f: @escaping(T) -> Void) {
+            task(f)
+        }
+    }
+    
     // MARK: - IBOutlet
     
     @IBOutlet var timerLabel: UILabel!
@@ -42,7 +56,9 @@ final class ViewController: UIViewController {
     @IBAction func onLoad() {
         editView.text = ""
         setVisibleWithAnimation(activityIndicator, true)
-        downloadJSON(from: MEMBER_LIST_URL) { json in
+        
+        let json: 나중에생기는데이터<String?> = downloadJSON(from: MEMBER_LIST_URL)
+        json.나중에오면 { json in
             self.editView.text = json
             self.setVisibleWithAnimation(self.activityIndicator, false)
         }
@@ -52,20 +68,25 @@ final class ViewController: UIViewController {
 // MARK: - Private Methods
 
 extension ViewController {
-    private func downloadJSON(from url: String, completion: @escaping (String?) -> Void) {
-        DispatchQueue.global().async {
-            guard let url = URL(string: url) else {
-                return
-            }
-            do {
-                let data = try Data(contentsOf: url)
-                let json = String(data: data, encoding: .utf8)
-                DispatchQueue.main.async {
-                    completion(json)
+    private func downloadJSON(from url: String) -> 나중에생기는데이터<String?> {
+        return 나중에생기는데이터() { f in
+            DispatchQueue.global().async {
+                guard let url = URL(string: url) else {
+                    return
                 }
-            } catch {
-                print(error)
+                do {
+                    let data = try Data(contentsOf: url)
+                    let json = String(data: data, encoding: .utf8)
+                    DispatchQueue.main.async {
+                        f(json)
+                    }
+                } catch {
+                    print(error)
+                }
             }
         }
     }
 }
+
+
+
