@@ -12,10 +12,15 @@ import UIKit
 
 let MEMBER_LIST_URL = "https://my.api.mockaroo.com/members_with_avatar.json?key=44ce18f0"
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    // MARK: - IBOutlet
+    
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var editView: UITextView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
@@ -31,20 +36,36 @@ class ViewController: UIViewController {
             self?.view.layoutIfNeeded()
         })
     }
-
-    // MARK: SYNC
-
-    @IBOutlet var activityIndicator: UIActivityIndicatorView!
-
+    
+    // MARK: - IBActions
+    
     @IBAction func onLoad() {
         editView.text = ""
         setVisibleWithAnimation(activityIndicator, true)
+        downloadJSON(from: MEMBER_LIST_URL) { json in
+            self.editView.text = json
+            self.setVisibleWithAnimation(self.activityIndicator, false)
+        }
+    }
+}
 
-        let url = URL(string: MEMBER_LIST_URL)!
-        let data = try! Data(contentsOf: url)
-        let json = String(data: data, encoding: .utf8)
-        self.editView.text = json
-        
-        self.setVisibleWithAnimation(self.activityIndicator, false)
+// MARK: - Private Methods
+
+extension ViewController {
+    private func downloadJSON(from url: String, completion: @escaping (String?) -> Void) {
+        DispatchQueue.global().async {
+            guard let url = URL(string: url) else {
+                return
+            }
+            do {
+                let data = try Data(contentsOf: url)
+                let json = String(data: data, encoding: .utf8)
+                DispatchQueue.main.async {
+                    completion(json)
+                }
+            } catch {
+                print(error)
+            }
+        }
     }
 }
