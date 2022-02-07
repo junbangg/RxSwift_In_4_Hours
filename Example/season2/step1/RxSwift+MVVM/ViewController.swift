@@ -44,7 +44,10 @@ final class ViewController: UIViewController {
         setVisibleWithAnimation(activityIndicator, true)
         
         downloadJSON(from: MEMBER_LIST_URL)
-            .subscribe { event in
+            .subscribe { [weak self] event in
+                guard let self = self else {
+                    return
+                }
                 switch event {
                 case .next(let json):
                     self.editView.text = json
@@ -56,12 +59,14 @@ final class ViewController: UIViewController {
                 }
                 
             }
+        
     }
 }
 
 // MARK: - Private Methods
 
 extension ViewController {
+    
     private func downloadJSON(from url: String) -> Observable<String?> {
         return Observable.create() { f in
             DispatchQueue.global().async {
@@ -73,6 +78,7 @@ extension ViewController {
                     let json = String(data: data, encoding: .utf8)
                     DispatchQueue.main.async {
                         f.onNext(json)
+                        f.onCompleted()
                     }
                 } catch {
                     print(error)
@@ -83,6 +89,5 @@ extension ViewController {
         }
     }
 }
-
 
 
