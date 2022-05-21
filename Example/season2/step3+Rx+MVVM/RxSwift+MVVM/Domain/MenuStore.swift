@@ -9,6 +9,8 @@
 import Foundation
 import RxSwift
 
+// 이 부분을 Use Case 로 변환
+
 protocol MenuFetchable {
     func fetchMenus() -> Observable<[MenuItem]>
 }

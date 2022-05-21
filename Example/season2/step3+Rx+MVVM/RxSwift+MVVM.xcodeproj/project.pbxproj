@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1112F2E2302531800A79CBD /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1112F2D2302531800A79CBD /* MenuViewModel.swift */; };
+		A1112F2E2302531800A79CBD /* DefaultMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1112F2D2302531800A79CBD /* DefaultMenuViewModel.swift */; };
 		A1112F302302532B00A79CBD /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1112F2F2302532B00A79CBD /* OrderViewModel.swift */; };
 		A168F0A022F7FB2C00A9E178 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168F09F22F7FB2C00A9E178 /* AppDelegate.swift */; };
 		A168F0A222F7FB2C00A9E178 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168F0A122F7FB2C00A9E178 /* MenuViewController.swift */; };
@@ -27,10 +27,11 @@
 		A1DBF1512302B5F1005DD273 /* ViewMenuTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DBF1502302B5F1005DD273 /* ViewMenuTest.swift */; };
 		A1DBF1522302B636005DD273 /* ViewMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DBF13A2302ADA7005DD273 /* ViewMenu.swift */; };
 		A1DBF1542302B81B005DD273 /* MenuViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1DBF1532302B81B005DD273 /* MenuViewModelTest.swift */; };
-		A1DBF1552302B86D005DD273 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1112F2D2302531800A79CBD /* MenuViewModel.swift */; };
+		A1DBF1552302B86D005DD273 /* DefaultMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1112F2D2302531800A79CBD /* DefaultMenuViewModel.swift */; };
 		A1DBF1562302B86F005DD273 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1112F2F2302532B00A79CBD /* OrderViewModel.swift */; };
 		A1DBF1572302B922005DD273 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A168F0B922FAF3CC00A9E178 /* Utils.swift */; };
 		E2AFEEC81F02AC78E0249DDC /* Pods_RxSwift_MVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3442FB936BB096840300742 /* Pods_RxSwift_MVVM.framework */; };
+		EDC323342838D22200620F0F /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC323332838D22200620F0F /* ViewModelType.swift */; };
 		EF09B6593BF11AAC56F0C458 /* Pods_RxSwift_MVVMTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAC39540D91203B31915B39D /* Pods_RxSwift_MVVMTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,7 +49,7 @@
 		26029F8DDB157740DCEA5D7F /* Pods-RxSwift+MVVMTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift+MVVMTests.debug.xcconfig"; path = "Target Support Files/Pods-RxSwift+MVVMTests/Pods-RxSwift+MVVMTests.debug.xcconfig"; sourceTree = "<group>"; };
 		606131A3A3F3F4D6822F8E43 /* Pods-RxSwift+MVVM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift+MVVM.debug.xcconfig"; path = "Target Support Files/Pods-RxSwift+MVVM/Pods-RxSwift+MVVM.debug.xcconfig"; sourceTree = "<group>"; };
 		702A8D69CB535115CF9B427F /* Pods-RxSwift+MVVMTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift+MVVMTests.release.xcconfig"; path = "Target Support Files/Pods-RxSwift+MVVMTests/Pods-RxSwift+MVVMTests.release.xcconfig"; sourceTree = "<group>"; };
-		A1112F2D2302531800A79CBD /* MenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
+		A1112F2D2302531800A79CBD /* DefaultMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMenuViewModel.swift; sourceTree = "<group>"; };
 		A1112F2F2302532B00A79CBD /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		A168F09C22F7FB2C00A9E178 /* RxSwift+MVVM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift+MVVM.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A168F09F22F7FB2C00A9E178 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		AAC39540D91203B31915B39D /* Pods_RxSwift_MVVMTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_MVVMTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C566DF4A5E7D8CFD17BE3140 /* Pods-RxSwift+MVVM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift+MVVM.release.xcconfig"; path = "Target Support Files/Pods-RxSwift+MVVM/Pods-RxSwift+MVVM.release.xcconfig"; sourceTree = "<group>"; };
 		D3442FB936BB096840300742 /* Pods_RxSwift_MVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_MVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDC323332838D22200620F0F /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				A1DBF13A2302ADA7005DD273 /* ViewMenu.swift */,
-				A1112F2D2302531800A79CBD /* MenuViewModel.swift */,
+				A1112F2D2302531800A79CBD /* DefaultMenuViewModel.swift */,
 				A1112F2F2302532B00A79CBD /* OrderViewModel.swift */,
+				EDC323332838D22200620F0F /* ViewModelType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -280,7 +283,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
-				LastUpgradeCheck = 1030;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = iamchiwon;
 				TargetAttributes = {
 					A168F09B22F7FB2C00A9E178 = {
@@ -425,9 +428,10 @@
 				A1112F302302532B00A79CBD /* OrderViewModel.swift in Sources */,
 				A168F0BE22FAFAC300A9E178 /* OrderViewController.swift in Sources */,
 				A168F0BC22FAF9B800A9E178 /* MenuItemTableViewCell.swift in Sources */,
+				EDC323342838D22200620F0F /* ViewModelType.swift in Sources */,
 				A168F0A022F7FB2C00A9E178 /* AppDelegate.swift in Sources */,
 				A168F0B822FADE7000A9E178 /* MenuItem.swift in Sources */,
-				A1112F2E2302531800A79CBD /* MenuViewModel.swift in Sources */,
+				A1112F2E2302531800A79CBD /* DefaultMenuViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1DBF14F2302B1A6005DD273 /* MenuStore.swift in Sources */,
-				A1DBF1552302B86D005DD273 /* MenuViewModel.swift in Sources */,
+				A1DBF1552302B86D005DD273 /* DefaultMenuViewModel.swift in Sources */,
 				A1DBF1572302B922005DD273 /* Utils.swift in Sources */,
 				A1DBF1512302B5F1005DD273 /* ViewMenuTest.swift in Sources */,
 				A1DBF1462302B183005DD273 /* MenuStoreTest.swift in Sources */,
@@ -503,6 +507,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -564,6 +569,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -601,7 +607,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V6C8BWW65M;
 				INFOPLIST_FILE = "RxSwift+MVVM/App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -621,7 +627,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V6C8BWW65M;
 				INFOPLIST_FILE = "RxSwift+MVVM/App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

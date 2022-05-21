@@ -11,22 +11,26 @@ import RxSwift
 import RxViewController
 import UIKit
 
-class MenuViewController: UIViewController {
-    let viewModel: MenuViewModelType
+final class MenuViewController: UIViewController {
+    // MARK: - Properties
+    
+    private let viewModel: MenuViewModel
     var disposeBag = DisposeBag()
 
-    // MARK: - Life Cycle
+    // MARK: - Initializer
 
-    init(viewModel: MenuViewModelType = MenuViewModel()) {
+    init(viewModel: MenuViewModel = DefaultMenuViewModel()) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder aDecoder: NSCoder) {
-        viewModel = MenuViewModel()
+        viewModel = DefaultMenuViewModel()
         super.init(coder: aDecoder)
     }
 
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = UIRefreshControl()
@@ -81,8 +85,10 @@ class MenuViewController: UIViewController {
         // 페이지 이동
         viewModel.showOrderPage
             .subscribe(onNext: { [weak self] selectedMenus in
-                self?.performSegue(withIdentifier: OrderViewController.identifier,
-                                   sender: selectedMenus)
+                self?.performSegue(
+                    withIdentifier: OrderViewController.identifier,
+                    sender: selectedMenus
+                )
             })
             .disposed(by: disposeBag)
 
@@ -103,7 +109,9 @@ class MenuViewController: UIViewController {
             .map { !$0 }
             .do(onNext: { [weak self] finished in
                 if finished {
-                    self?.tableView.refreshControl?.endRefreshing()
+                    DispatchQueue.main.async {
+                        self?.tableView.refreshControl?.endRefreshing()
+                    }
                 }
             })
             .bind(to: activityIndicator.rx.isHidden)
@@ -111,8 +119,10 @@ class MenuViewController: UIViewController {
 
         // 테이블뷰 아이템들
         viewModel.allMenus
-            .bind(to: tableView.rx.items(cellIdentifier: MenuItemTableViewCell.identifier,
-                                         cellType: MenuItemTableViewCell.self)) {
+            .bind(to: tableView.rx.items(
+                cellIdentifier: MenuItemTableViewCell.identifier,
+                cellType: MenuItemTableViewCell.self
+            )) {
                 _, item, cell in
 
                 cell.onData.onNext(item)
