@@ -13,15 +13,12 @@ final class DefaultMenuUseCase: MenuUseCase {
     private let repository: MenuFetchable
     private let disposeBag = DisposeBag()
     
-    //     INPUT
-    //
+    //  INPUT ->
     var fetchMenus: AnyObserver<Void>
     var clearSelections: AnyObserver<Void>
     var makeOrder: AnyObserver<Void>
-//    var increaseMenuCount: AnyObserver<(menu: ViewMenu, inc: Int)>
-    //
     
-    // Input
+    // 내부
     var fetching = PublishSubject<Void>()
     var clearing = PublishSubject<Void>()
     var ordering = PublishSubject<Void>()
@@ -40,7 +37,6 @@ final class DefaultMenuUseCase: MenuUseCase {
         fetchMenus = fetching.asObserver()
         clearSelections = clearing.asObserver()
         makeOrder = ordering.asObserver()
-//        increaseMenuCount = increasing.asObserver()
     }
     
     func execute() {

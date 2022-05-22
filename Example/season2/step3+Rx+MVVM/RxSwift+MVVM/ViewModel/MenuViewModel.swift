@@ -63,6 +63,11 @@ extension MenuViewModel {
         input.increaseMenuCount
             .bind(to: useCase.increasing)
             .disposed(by: disposeBag)
+        
+        input.orderButtonTapped
+            .bind(to: useCase.makeOrder)
+            .disposed(by: disposeBag)
+        
         useCase.execute()
     }
     

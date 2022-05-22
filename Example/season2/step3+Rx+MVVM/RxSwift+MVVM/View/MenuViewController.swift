@@ -63,8 +63,6 @@ final class MenuViewController: UIViewController {
             .controlEvent(.valueChanged)
             .map { _ in () } ?? Observable.just(())
         
-        
-        
         // 처음 보일때 하고 clear 버튼 눌렀을 때
         let viewDidAppear = rx.viewWillAppear.map { _ in () }
         let clearButtonTapped = clearButton.rx.tap.map { _ in () }
@@ -83,20 +81,6 @@ final class MenuViewController: UIViewController {
             orderButtonTapped: orderButtonTapped,
             increaseMenuCount: increaseMenuCount
         )
-        
-        // ------------------------------
-        //     NAVIGATION
-        // ------------------------------
-        
-        // 페이지 이동
-        //        viewModel.showOrderPage
-        //            .subscribe(onNext: { [weak self] selectedMenus in
-        //                self?.performSegue(
-        //                    withIdentifier: OrderViewController.identifier,
-        //                    sender: selectedMenus
-        //                )
-        //            })
-        //            .disposed(by: disposeBag)
         
         // ------------------------------
         //     OUTPUT
@@ -150,6 +134,20 @@ final class MenuViewController: UIViewController {
         // 선택된 아이템 총가격
         output.totalPriceText
             .bind(to: totalPrice.rx.text)
+            .disposed(by: disposeBag)
+        
+        // ------------------------------
+        //     NAVIGATION
+        // ------------------------------
+        
+        // 페이지 이동
+        output.showOrderPage
+            .subscribe(onNext: { [weak self] selectedMenus in
+                self?.performSegue(
+                    withIdentifier: OrderViewController.identifier,
+                    sender: selectedMenus
+                )
+            })
             .disposed(by: disposeBag)
     }
     
