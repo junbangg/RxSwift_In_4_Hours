@@ -37,12 +37,13 @@ final class MenuViewModel {
     
     // MARK: - Initializer
     
-    init(domain: MenuFetchable = MenuStore()) {
-        self.useCase = DefaultMenuUseCase(repository: domain)
+    init(repository: MenuFetchable = MenuStore()) {
+        self.useCase = DefaultMenuUseCase(repository: repository)
     }
     
     func transform(input: Input, disposeBag: DisposeBag) -> Output {
-        configureInput(input, disposeBag: disposeBag)
+        setupUseCase(with: input, disposeBag: disposeBag)
+        useCase.execute()
         
         return createOutput(from: self.useCase, disposeBag: disposeBag)
     }
@@ -51,7 +52,7 @@ final class MenuViewModel {
 // MARK: - Transform Methods
 
 extension MenuViewModel {
-    private func configureInput(_ input: Input, disposeBag: DisposeBag) {
+    private func setupUseCase(with input: Input, disposeBag: DisposeBag) {
         Observable.merge([input.firstLoad, input.reload])
             .bind(to: useCase.fetchMenus)
             .disposed(by: disposeBag)
@@ -61,14 +62,12 @@ extension MenuViewModel {
             .disposed(by: disposeBag)
         
         input.increaseMenuCount
-            .bind(to: useCase.increasing)
+            .bind(to: useCase.increaseMenu)
             .disposed(by: disposeBag)
         
         input.orderButtonTapped
             .bind(to: useCase.makeOrder)
             .disposed(by: disposeBag)
-        
-        useCase.execute()
     }
     
     private func createOutput(from useCase: MenuUseCase, disposeBag: DisposeBag) -> Output {

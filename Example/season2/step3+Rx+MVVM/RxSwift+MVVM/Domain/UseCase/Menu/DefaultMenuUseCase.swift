@@ -10,23 +10,22 @@ import Foundation
 import RxSwift
 
 final class DefaultMenuUseCase: MenuUseCase {
+    // Private
     private let repository: MenuFetchable
     private let disposeBag = DisposeBag()
+    private let fetching = PublishSubject<Void>()
+    private let clearing = PublishSubject<Void>()
+    private let increasing = PublishSubject<(menu: ViewMenu, inc: Int)>()
     
     //  INPUT ->
     var fetchMenus: AnyObserver<Void>
     var clearSelections: AnyObserver<Void>
     var makeOrder: AnyObserver<Void>
-    
-    // 내부
-    var fetching = PublishSubject<Void>()
-    var clearing = PublishSubject<Void>()
+    var increaseMenu: AnyObserver<(menu: ViewMenu, inc: Int)>
     var ordering = PublishSubject<Void>()
-    var increasing = PublishSubject<(menu: ViewMenu, inc: Int)>()
-    
     // Output
     var menus = BehaviorSubject<[ViewMenu]>(value: [])
-    var activating = BehaviorSubject<Bool>(value: false) // maybe change to relay
+    var activating = BehaviorSubject<Bool>(value: false)
     var error = PublishSubject<Error>()
     
     // MARK: - Initializer
@@ -37,6 +36,7 @@ final class DefaultMenuUseCase: MenuUseCase {
         fetchMenus = fetching.asObserver()
         clearSelections = clearing.asObserver()
         makeOrder = ordering.asObserver()
+        increaseMenu = increasing.asObserver()
     }
     
     func execute() {
