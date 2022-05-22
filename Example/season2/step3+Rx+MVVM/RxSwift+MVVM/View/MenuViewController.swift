@@ -35,7 +35,7 @@ final class MenuViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.refreshControl = UIRefreshControl()
-        //        setupBindings()
+        setupBindings()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -72,13 +72,16 @@ final class MenuViewController: UIViewController {
         // order 버튼 눌렀을 때
         let orderButtonTapped = orderButton.rx.tap
             .map { _ in () }
+        let increaseMenuCount = PublishSubject<(menu: ViewMenu, inc: Int)>()
+            .asObserver()
         
         let input = MenuViewModel.Input(
             firstLoad: firstLoad,
             reload: reload,
             viewDidAppear: viewDidAppear,
             clearButtonTapped: clearButtonTapped,
-            orderButtonTapped: orderButtonTapped
+            orderButtonTapped: orderButtonTapped,
+            increaseMenuCount: increaseMenuCount
         )
         
         // ------------------------------
@@ -134,7 +137,7 @@ final class MenuViewController: UIViewController {
                 cell.onData.onNext(item)
                 cell.onChanged
                     .map { (item, $0) }
-                    .bind(to: output.increaseMenuCount)
+                    .bind(to: input.increaseMenuCount)
                     .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)

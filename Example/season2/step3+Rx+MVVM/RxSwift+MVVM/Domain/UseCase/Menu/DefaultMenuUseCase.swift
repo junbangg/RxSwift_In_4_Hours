@@ -18,7 +18,7 @@ final class DefaultMenuUseCase: MenuUseCase {
     var fetchMenus: AnyObserver<Void>
     var clearSelections: AnyObserver<Void>
     var makeOrder: AnyObserver<Void>
-    var increaseMenuCount: AnyObserver<(menu: ViewMenu, inc: Int)>
+//    var increaseMenuCount: AnyObserver<(menu: ViewMenu, inc: Int)>
     //
     
     // Input
@@ -40,7 +40,7 @@ final class DefaultMenuUseCase: MenuUseCase {
         fetchMenus = fetching.asObserver()
         clearSelections = clearing.asObserver()
         makeOrder = ordering.asObserver()
-        increaseMenuCount = increasing.asObserver()
+//        increaseMenuCount = increasing.asObserver()
     }
     
     func execute() {

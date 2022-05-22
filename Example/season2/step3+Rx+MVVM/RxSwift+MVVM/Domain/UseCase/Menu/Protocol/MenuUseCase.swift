@@ -13,7 +13,7 @@ protocol MenuUseCase {
     var fetchMenus: AnyObserver<Void> { get set }
     var clearSelections: AnyObserver<Void> { get set }
     var makeOrder: AnyObserver<Void> { get set }
-    var increaseMenuCount: AnyObserver<(menu: ViewMenu, inc: Int)> { get set }
+//    var increaseMenuCount: AnyObserver<(menu: ViewMenu, inc: Int)> { get set }
     
     var fetching: PublishSubject<Void> { get set}
     var clearing: PublishSubject<Void> { get set }

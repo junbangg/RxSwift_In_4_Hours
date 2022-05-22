@@ -19,6 +19,7 @@ final class MenuViewModel {
         let viewDidAppear: Observable<Void>
         let clearButtonTapped: Observable<Void>
         let orderButtonTapped: Observable<Void>
+        let increaseMenuCount: PublishSubject<(menu: ViewMenu, inc: Int)>
     }
     
     struct Output {
@@ -59,6 +60,9 @@ extension MenuViewModel {
             .bind(to: useCase.clearSelections)
             .disposed(by: disposeBag)
         
+        input.increaseMenuCount
+            .bind(to: useCase.increasing)
+            .disposed(by: disposeBag)
         useCase.execute()
     }
     
@@ -88,6 +92,7 @@ extension MenuViewModel {
                 }
             })
                 .filter { $0.count > 0 }
+        
         let output = Output(
             activated: activated,
             errorMessage: errorMessage,
